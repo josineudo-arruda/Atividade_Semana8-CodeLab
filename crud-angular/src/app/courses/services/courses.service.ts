@@ -7,7 +7,7 @@ import {delay, first} from "rxjs";
   providedIn: 'root'
 })
 export class CoursesService {
-  private readonly API = '/assets/courses.json';
+  private readonly API = 'api/courses'
   constructor(private httpClient: HttpClient) { }
 
   list() {

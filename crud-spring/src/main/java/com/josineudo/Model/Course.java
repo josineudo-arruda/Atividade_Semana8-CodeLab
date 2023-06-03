@@ -1,5 +1,6 @@
 package com.josineudo.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import lombok.Data;
 @Entity
 public class Course {
     @Id
+    @JsonProperty("_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
