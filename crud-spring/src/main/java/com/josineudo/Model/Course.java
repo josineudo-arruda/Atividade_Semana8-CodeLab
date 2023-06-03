@@ -13,7 +13,7 @@ public class Course {
     private Long id;
 
     @Column(length = 200, nullable = false)
-    private String nome;
+    private String name;
 
     @Column(length = 20, nullable = false)
     private String category;
@@ -23,6 +23,6 @@ public class Course {
     public void setId(Long id) {this.id = id;}
     public String getCategory() {return category;}
     public void setCategory(String category) {this.category = category;}
-    public String getNome() {return nome;}
-    public void setNome(String nome) {this.nome = nome;}
+    public String getName() {return name;}
+    public void setNome(String name) {this.name = name;}
 }

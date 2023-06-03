@@ -20,7 +20,7 @@ public class CrudSpringApplication {
 			courseRepository.deleteAll();
 
 			Course c = new Course();
-			c.setNome("1989");
+			c.setName("1989");
 			c.setCategory("Pop");
 
 			courseRepository.save(c);
