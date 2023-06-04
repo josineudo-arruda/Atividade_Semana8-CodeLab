@@ -3,6 +3,9 @@ package com.josineudo.Controller;
 import com.josineudo.Model.Course;
 import com.josineudo.Repository.CourseRepository;
 import lombok.AllArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +27,19 @@ public class CourseCotroller {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody Course course) {
+    public Course create(@RequestBody @Valid Course course) {
         return courseRepository.save(course);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> findById(@PathVariable Long id) {
+    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) {
         return courseRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course>  update(@PathVariable Long id, @RequestBody Course course) {
+    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(course.getName());
@@ -48,7 +51,7 @@ public class CourseCotroller {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable @NotNull @Positive Long id) {
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     courseRepository.deleteById(id);
