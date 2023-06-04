@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-import {CoursesService} from "../../services/courses.service";
 
+import { courseResolver } from './course.resolver';
 
 describe('courseResolver', () => {
   const executeResolver: ResolveFn<boolean> = (...resolverParameters) =>
-    TestBed.runInInjectionContext(() => CoursesService(...resolverParameters));
+    TestBed.runInInjectionContext(() => courseResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

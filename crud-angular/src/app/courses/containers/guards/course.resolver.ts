@@ -1,10 +1,9 @@
 import {ActivatedRouteSnapshot, Resolve, ResolveFn, RouterStateSnapshot} from '@angular/router';
+import {CoursesService} from "../../services/courses.service";
 
 import {Observable, of} from "rxjs";
-
-import {Injectable} from "@angular/core";
 import {Course} from "../../model/course";
-import {CoursesService} from "../../services/courses.service";
+import {Injectable} from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +22,4 @@ export class CourseResolver implements Resolve<Course> {
     return of({_id: '', name: '', category: ''})
   }
 
-}
+};

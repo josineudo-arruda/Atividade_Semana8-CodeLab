@@ -27,6 +27,10 @@ export class CoursesService {
     return this.create(record)
   }
 
+  remove(id: String) {
+    return this.httpClient.delete(`${this.API}/${id}`)
+  }
+
   private create(record: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, record)
   }
