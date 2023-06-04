@@ -1,5 +1,6 @@
 package com.josineudo;
 
+import com.josineudo.Enums.Category;
 import com.josineudo.Model.Course;
 import com.josineudo.Repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ public class CrudSpringApplication {
 
 			Course c = new Course();
 			c.setName("1989");
-			c.setCategory("Pop");
+			c.setCategory(Category.POP);
 
 			courseRepository.save(c);
 		};

@@ -1,6 +1,10 @@
 package com.josineudo.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.josineudo.Enums.Category;
+import com.josineudo.Enums.Converters.CategoryConverter;
+import com.josineudo.Enums.Converters.StatusConverter;
+import com.josineudo.Enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,10 +20,9 @@ import org.hibernate.annotations.Where;
 @Where(clause = "status = 'Ativo'")
 public class Course {
     @Id
-    @JsonProperty("_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("_id")
     private Long id;
-
     @NotBlank
     @NotNull
     @Length(min = 5, max = 100)
@@ -27,23 +30,12 @@ public class Course {
     private String name;
 
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Pop|Country")
-    private String category;
+    @Column(length =10, nullable = false)
+    @Convert(converter = CategoryConverter.class)
+    private Category category;
 
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
-    private String status = "Ativo";
-
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    public String getCategory() {return category;}
-    public void setCategory(String category) {this.category = category;}
-    public String getName() {return name;}
-    public void setNome(String name) {this.name = name;}
-    public String getStatus() {return status;}
-    public void setStatus(String status) {this.status = status;}
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
 }

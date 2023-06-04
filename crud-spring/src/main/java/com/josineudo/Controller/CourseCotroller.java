@@ -10,10 +10,12 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/courses")
 @AllArgsConstructor
@@ -21,12 +23,10 @@ public class CourseCotroller {
     @Autowired
     private final CourseService courseService;
 
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
-    }
+    public CourseController(CourseService courseService) {this.courseService = courseService;}
 
     @GetMapping
-    public @ResponseBody List<CourseDTO> list() {
+    public List<CourseDTO> list() {
         return courseService.list();
     }
 
@@ -37,26 +37,18 @@ public class CourseCotroller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CourseDTO> findById(@PathVariable @NotNull @Positive Long id) {
-        return courseService.findById(id)
-                .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+    public CourseDTO findById(@PathVariable  @NotNull @Positive Long id) {
+        return courseService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CourseDTO>  update(@PathVariable  @NotNull @Positive Long id, @RequestBody @Valid CourseDTO course) {
-        return courseService.update(id, course)
-                .map(recordFound -> {
-                    return ResponseEntity.ok().body(recordFound);
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public CourseDTO  update(@PathVariable  @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
+        return courseService.update(id, course);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable @NotNull @Positive Long id) {
-        if(courseService.delete(id)) {
-            return ResponseEntity.noContent().<Void>build();
-        }
-        return ResponseEntity.notFound().build();
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable @NotNull @Positive Long id) {
+        courseService.delete(id);
     }
 }
