@@ -14,14 +14,11 @@ import {CoursesListComponent} from "./components/courses-list/courses-list.compo
     CoursesComponent,
     CourseFormComponent,
     CoursesListComponent,
-    CourseFormComponent,
-    CoursesListComponent,
   ],
   imports: [
     CommonModule,
     CoursesRoutingModule,
     AppMaterialModule,
-    SharedModule,
     SharedModule,
     ReactiveFormsModule,
   ]
