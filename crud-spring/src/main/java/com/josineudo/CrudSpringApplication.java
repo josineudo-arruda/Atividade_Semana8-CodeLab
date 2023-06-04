@@ -2,6 +2,7 @@ package com.josineudo;
 
 import com.josineudo.Enums.Category;
 import com.josineudo.Model.Course;
+import com.josineudo.Model.Lesson;
 import com.josineudo.Repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +24,12 @@ public class CrudSpringApplication {
 			Course c = new Course();
 			c.setName("1989");
 			c.setCategory(Category.POP);
+
+			Lesson l = new Lesson();
+			l.setName("New Romantics");
+			l.setYoutubeUrl("https://www.youtube.com/watch?v=wyK7YuwUWsU");
+			l.setCourse(c);
+			c.getLessons().add(l);
 
 			courseRepository.save(c);
 		};
