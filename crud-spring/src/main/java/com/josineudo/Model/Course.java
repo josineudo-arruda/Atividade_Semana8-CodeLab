@@ -26,12 +26,12 @@ public class Course {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @NotBlank
+    @NotNull
     @Length(max = 10)
     @Pattern(regexp = "Pop|Country")
     private String category;
 
-    @NotBlank
+    @NotNull
     @Length(max = 10)
     @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
