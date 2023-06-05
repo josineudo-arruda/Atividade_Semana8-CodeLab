@@ -25,11 +25,19 @@ public class CrudSpringApplication {
 			c.setName("1989");
 			c.setCategory(Category.POP);
 
-			Lesson l = new Lesson();
-			l.setName("New Romantics");
-			l.setYoutubeUrl("https://www.youtube.com/watch?v=wyK7YuwUWsU");
-			l.setCourse(c);
-			c.getLessons().add(l);
+			Lesson l1 = new Lesson();
+			l1.setName("New Romantics");
+			l1.setYoutubeUrl("https://www.youtube.com/watch?v=wyK7YuwUWsU");
+			// l1.setYoutubeUrl("watch?v=wyK7YuwUWsU");
+			l1.setCourse(c);
+			c.getLessons().add(l1);
+
+			Lesson l2 = new Lesson();
+			l2.setName("Blank Space");
+			l2.setYoutubeUrl("https://www.youtube.com/watch?v=e-ORhEE9VVg");
+			//l2.setYoutubeUrl("watch?v=e-ORhEE9VVg");
+			l2.setCourse(c);
+			c.getLessons().add(l2);
 
 			courseRepository.save(c);
 		};

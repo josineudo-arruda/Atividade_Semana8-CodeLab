@@ -3,7 +3,11 @@ package com.josineudo.Mapper;
 import com.josineudo.Enums.Category;
 import com.josineudo.Model.Course;
 import com.josineudo.dto.CourseDTO;
+import com.josineudo.dto.LessonDTO;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CourseMapper {
@@ -11,7 +15,12 @@ public class CourseMapper {
         if(course == null) {
             return null;
         }
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
+        List<LessonDTO> lessons = course.getLessons().stream()
+                .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(), lesson.getYoutubeUrl()))
+                .collect(Collectors.toList());
+
+        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue(),
+                lessons);
     }
 
     public Course toEntity(CourseDTO courseDTO) {
